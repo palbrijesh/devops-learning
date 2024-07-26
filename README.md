@@ -20,11 +20,11 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
-## 2. Install OpenJDK 11
+## 2. Install OpenJDK 17
 
-* Install OpenJDK 11.
+* Install OpenJDK 17.
 ```bash
-sudo apt install -y openjdk-11-jdk
+sudo apt install -y openjdk-17-jdk
 ```
 
 ## 3. Install and Configure PostgreSQL
@@ -109,22 +109,22 @@ sudo apt install -y zip
 * Locate the latest download URL from [SonarQube official download page](https://www.sonarqube.org/downloads/).
 At the time of writing this document, the download URL was as follows: 
 ```bash
-https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
 ```
 
 * Download the SonarQube distribution files.
 ```bash
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
 ```
 
 * Unzip the downloaded file.
 ```bash
-sudo unzip sonarqube-9.0.1.46107.zip
+sudo unzip sonarqube-10.6.0.92116.zip
 ```
 
 * Move the unzipped files to `/opt/sonarqube` directory
 ```bash
-sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
+sudo mv sonarqube-10.6.0.92116 /opt/sonarqube
 ```
 
 ## 5. Add SonarQube Group and User
