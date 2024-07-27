@@ -444,4 +444,3 @@ sonar-scanner -D sonar.login=your_token_here
 >``` 
 
 * The project’s code quality report will now be on the SonarQube dashboard.
-
