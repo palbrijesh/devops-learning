@@ -80,8 +80,6 @@ def notifyFailed() {
       body: """<h3>Build Failed:  '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</h3>
         <p><b>Project Name :</b> '${env.JOB_NAME}'</p>
         <p><b>Build Times :</b> '${env.BUILD_NUMBER}'</p>
-        <p><b>Trunk URL :</b> https://spcodes.rd.tp-link.net/VR500/VR500Test.git</p>
-        <p><b>Docker images :</b> ubuntu14.04-bcm:v2</p>
         <!--<p><b>The author :</b> '${env.CHANGE_AUTHOR}'</p>
         <p><a href='${env.BUILD_URL}'>Click for details</a></p>-->
         <p><b>Cause :</b> '${CAUSE}'</p>
