@@ -81,7 +81,7 @@ def notifyFailed() {
         <p><b>Cause :</b> '${CAUSE}'</p>
         <p><b>Console Message :</b> Please check the attachment</p>""",
        to: "$EMAIL_TO",
-       attachLog: true, 
+       attachLog: Trued, 
        compressLog: true
     )
 }
