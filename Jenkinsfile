@@ -46,14 +46,48 @@ pipeline {
     }
     
     post {
-        always {
-            emailext (
-                subject: "${env.PROJECT_NAME} - Build ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}",
-                body: 'A Test EMail',
-                to: "$EMAIL_TO",
-                mimeType: "text/html",
-                attachmentsPattern: '**/*.log'
-            )
+        success {
+            notifySuccessful()
+        }
+        failure {
+            notifyFailed()
+        }
+        unstable {
+            emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "${EMAIL_TO}", 
+                    subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+        changed {
+            emailext body: 'Check console output at $BUILD_URL to view the results.', 
+                    to: "${EMAIL_TO}", 
+                    subject: 'Jenkins build is back to normal: $PROJECT_NAME - #$BUILD_NUMBER'
         }
     }
+}
+
+def notifySuccessful() { 
+    emailext (
+      subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      to: "$EMAIL_TO"
+    )
+ }
+
+def notifyFailed() {
+   emailext (
+      subject: "【Jenkins CI】FAILED: Project '${env.JOB_NAME}'",
+      body: """<h3>Build Failed:  '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</h3>
+        <p><b>Project Name :</b> '${env.JOB_NAME}'</p>
+        <p><b>Build Times :</b> '${env.BUILD_NUMBER}'</p>
+        <p><b>Trunk URL :</b> https://spcodes.rd.tp-link.net/VR500/VR500Test.git</p>
+        <p><b>Docker images :</b> ubuntu14.04-bcm:v2</p>
+        <!--<p><b>The author :</b> '${env.CHANGE_AUTHOR}'</p>
+        <p><a href='${env.BUILD_URL}'>Click for details</a></p>-->
+        <p><b>Cause :</b> '${CAUSE}'</p>
+        <p><b>Console Message :</b> Please check the attachment</p>""",
+       to: "$EMAIL_TO",
+       attachLog: true, 
+       compressLog: true
+    )
 }
