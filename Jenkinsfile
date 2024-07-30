@@ -15,13 +15,13 @@ pipeline {
         stage('SonarQube Quality Analysis') {
             steps {
                 withSonarQubeEnv("sonar"){
-                    sh "$SONAR_HOME1/bin/sonar-scanner -Dsonar.projectName=neogym-fitness -Dsonar.projectKey=neogym-fitness"
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=neogym-fitness -Dsonar.projectKey=neogym-fitness"
                 }
             }
         }
         stage('OWASP Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'odc'
+                dependencyCheckadditionalArguments: '--scan ./', odcInstallation: 'odc'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 echo "Dependency Check --- Done"
             }
