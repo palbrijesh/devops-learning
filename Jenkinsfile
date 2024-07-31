@@ -5,11 +5,12 @@ pipeline {
     environment{
         SONAR_HOME= tool "sonar"
         EMAIL_TO = 'brijesh.pal@hotmail.com'
+        GIT_URL = 'https://github.com/palbrijesh/neogym-fitness.git'
     }
     stages {
-        stage('Clone code from GitHub') {
+        stage('Git Checkout') {
             steps {
-                git url: "https://github.com/palbrijesh/neogym-fitness.git", branch: "master"
+                git url: "$GIT_URL", branch: "master"
             }
         }
         stage('SonarQube Quality Analysis') {
